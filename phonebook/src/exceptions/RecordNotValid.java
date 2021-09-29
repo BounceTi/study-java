@@ -1,13 +1,10 @@
 package exceptions;
 
-public class RecordNotValid extends Exception{
-
-    public RecordNotValid() {
-    }
+public class RecordNotValid extends Exception {
 
     @Override
     public String getMessage() {
-        return "Main.Record not valid";
+        return "Name or phone number is empty";
     }
 
 }

@@ -2,11 +2,14 @@ package exceptions;
 
 public class PhoneNumberAlreadyExists extends Exception {
 
-    public PhoneNumberAlreadyExists() {
+    private String phoneNumber;
+
+    public PhoneNumberAlreadyExists(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
     public String getMessage() {
-        return "Phone number already exists";
+        return phoneNumber + " Phone number already exists";
     }
 }

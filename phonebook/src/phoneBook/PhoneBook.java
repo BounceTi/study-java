@@ -11,9 +11,6 @@ public class PhoneBook {
 
     private List<Record> recordList = new ArrayList<>();
 
-    public PhoneBook() {
-    }
-
     public List<Record> getAllRecords() {
         return recordList;
     }
@@ -21,26 +18,29 @@ public class PhoneBook {
     public void createRecord(Record record) {
         try {
             if (checkForRecord(record.getPhoneNumber())) {
-                throw new PhoneNumberAlreadyExists();
+                throw new PhoneNumberAlreadyExists(record.getPhoneNumber());
             }
             recordList.add(record);
-            System.out.println(record + " Successfully created");
+            System.out.println(record + " successfully created");
         } catch (PhoneNumberAlreadyExists e) {
-            System.out.println(record.getPhoneNumber() + " " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
     public void updateRecord(Record record) throws RecordNotFound {
         try {
             Record r = checkForRecord(record.getId());
-            if (record.getName().equals("") || record.getPhoneNumber().equals("")) {
+            if (record.getName() == null || record.getPhoneNumber() == null
+                    || record.getName().isBlank() || record.getPhoneNumber().isBlank()) {
+
                 throw new RecordNotValid();
             }
             int index = recordList.indexOf(r);
             recordList.set(index, record);
+            System.out.println(record + " has been updated");
 
         } catch (RecordNotValid e) {
-            System.out.println(record + " " + e.getMessage());
+            System.out.println(record + ": " + e.getMessage());
         }
     }
 
@@ -65,13 +65,12 @@ public class PhoneBook {
     }
 
     private Record checkForRecord(long id) throws RecordNotFound {
-        for (Record r : getAllRecords()) {
+        for (Record r : recordList) {
             if (r.getId() == id) {
                 return r;
             }
         }
-        System.out.println("Record with id " + id + " does not exist");
-        throw new RecordNotFound();
+        throw new RecordNotFound(id);
     }
 
 }
