@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class RecordNotValid extends Exception{
 
@@ -7,7 +7,7 @@ public class RecordNotValid extends Exception{
 
     @Override
     public String getMessage() {
-        return "Record not valid";
+        return "Main.Record not valid";
     }
 
 }

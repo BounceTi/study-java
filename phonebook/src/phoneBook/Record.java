@@ -1,3 +1,5 @@
+package phoneBook;
+
 import lombok.Data;
 
 @Data
@@ -12,12 +14,5 @@ public class Record {
         this.phoneNumber = phoneNumber;
         this.name = name;
     }
-
-    //    public void printInfo() {
-//        System.out.println("id = " + id +
-//                " phoneNumber = " + phoneNumber +
-//                " name = " + name);
-//
-//    }
 
 }

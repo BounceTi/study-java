@@ -1,6 +1,8 @@
-import Exceptions.PhoneNumberAlreadyExists;
-import Exceptions.RecordNotFound;
-import Exceptions.RecordNotValid;
+package phoneBook;
+
+import exceptions.PhoneNumberAlreadyExists;
+import exceptions.RecordNotFound;
+import exceptions.RecordNotValid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,9 @@ public class PhoneBook {
                 throw new PhoneNumberAlreadyExists();
             }
             recordList.add(record);
+            System.out.println(record + " Successfully created");
         } catch (PhoneNumberAlreadyExists e) {
-            e.getMessage();
+            System.out.println(record.getPhoneNumber() + " " + e.getMessage());
         }
     }
 
@@ -37,14 +40,21 @@ public class PhoneBook {
             recordList.set(index, record);
 
         } catch (RecordNotValid e) {
-            e.getMessage();
+            System.out.println(record + " " + e.getMessage());
         }
     }
 
     public void deleteRecord(long id) throws RecordNotFound {
         Record r = checkForRecord(id);
         recordList.remove(r);
+        System.out.println("Phone number " + r.getPhoneNumber() + " deleted");
+    }
 
+    public void print() {
+        System.out.println("\n" + "Phone Book:");
+        for (Record r : recordList) {
+            System.out.println(r);
+        }
     }
 
     private boolean checkForRecord(String phoneNumber) {
@@ -55,11 +65,12 @@ public class PhoneBook {
     }
 
     private Record checkForRecord(long id) throws RecordNotFound {
-        for (Record r : recordList) {
+        for (Record r : getAllRecords()) {
             if (r.getId() == id) {
                 return r;
             }
         }
+        System.out.println("Record with id " + id + " does not exist");
         throw new RecordNotFound();
     }
 
