@@ -1,3 +1,5 @@
+package accountmanager;
+
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -9,7 +11,7 @@ public class Account {
     private LocalDate dateOfBirth;
     private String email;
     private String password;
-    private boolean blocked = false;
+    private boolean blocked;
 
     public Account(String fullName, LocalDate dateOfBirth, String email, String password, boolean blocked) {
         this.fullName = fullName;
@@ -19,5 +21,12 @@ public class Account {
         this.blocked = blocked;
     }
 
-
+    @Override
+    public String toString() {
+        return  fullName + "," +
+                dateOfBirth + "," +
+                email + "," +
+                password + "," +
+                blocked + "\n";
+    }
 }
